@@ -112,8 +112,8 @@ export default function Home() {
 
         <ScrollList<PortfolioProject>
           data={projects}
-          itemHeight={340}
-          itemHeightMobile={380}
+          itemHeight={420}
+          itemHeightMobile={460}
           renderItem={(project) => (
             <div
               role="link"
@@ -129,16 +129,16 @@ export default function Home() {
               aria-label={`View ${project.title} details`}
             >
               <div
-                className="w-full h-36 sm:h-44 flex-shrink-0 overflow-hidden bg-muted bg-cover bg-center"
+                className="w-full h-44 sm:h-56 flex-shrink-0 overflow-hidden bg-muted bg-cover bg-center"
                 style={{ backgroundImage: `url(${project.imageUrl})` }}
                 aria-hidden
               />
 
-              <div className="flex min-w-0 flex-1 flex-col px-4 sm:px-5 py-3 sm:py-4">
+              <div className="flex min-w-0 flex-1 flex-col px-4 sm:px-5 py-4 sm:py-5">
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary mb-1">
                   {project.brand}
                 </p>
-                <h3 className="truncate text-base sm:text-heading-3 font-semibold text-foreground">
+                <h3 className="truncate text-lg sm:text-heading-3 font-semibold text-foreground">
                   {project.title}
                 </h3>
                 <p className="mt-1 line-clamp-2 text-sm sm:text-body text-muted-foreground">
