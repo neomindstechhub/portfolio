@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Galaxy from "./Galaxy";
+import ChatBot from "./ChatBot";
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,6 +32,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="relative z-10 py-4 sm:py-10 pb-24 sm:pb-20">
         {children}
       </main>
+      <ChatBot />
     </div>
   );
 }
