@@ -102,15 +102,16 @@ const ThreeDCarousel = ({
         >
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
             {items.map((item, index) => (
-              <div
+              <Link
                 key={item.id}
+                to={item.link}
                 className={cn(
-                  "absolute top-0 w-full max-w-3xl transform transition-all duration-500",
+                  "absolute top-0 w-full max-w-3xl transform transition-all duration-500 block",
                   getCardAnimationClass(index)
                 )}
                 aria-live={index === active ? "polite" : undefined}
                 aria-atomic={index === active}
-                aria-label={index === active ? `Project ${index + 1} of ${items.length}: ${item.title}` : undefined}
+                aria-label={index === active ? `Project ${index + 1} of ${items.length}: ${item.title}. Tap to view details.` : undefined}
               >
                 <Card
                   className="relative overflow-hidden bg-white/5 backdrop-blur-md border border-white/5 hover:border-primary/50 hover:bg-white/10 shadow-[0_18px_80px_rgba(0,0,0,0.7)] hover:shadow-[0_24px_96px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.05)] hover:-translate-y-0.5 rounded-2xl flex flex-col h-full transition-all duration-300 max-w-[calc(100vw-1.5rem)] sm:max-w-3xl"
@@ -145,29 +146,25 @@ const ThreeDCarousel = ({
                     </p>
 
                     <div className="mt-3 sm:mt-4">
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                      <div className="flex gap-1.5 sm:gap-2 mb-3 sm:mb-4 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-primary/10 text-primary rounded-full text-caption"
+                            className="px-2 py-1 bg-primary/10 text-primary rounded-full text-caption whitespace-nowrap shrink-0"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      <Link
-                        to={item.link}
-                        className="text-primary flex items-center hover:underline relative group w-fit"
-                      >
+                      <span className="text-primary flex items-center group w-fit">
                         <span className="relative z-10">Learn more</span>
                         <ArrowRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
-                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                      </Link>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -196,7 +193,7 @@ const ThreeDCarousel = ({
             </>
           )}
 
-          <div className="absolute bottom-3 sm:bottom-4 left-0 right-0 flex justify-center items-center gap-1.5 sm:gap-2 z-30">
+          <div className="absolute bottom-0 sm:bottom-1 left-0 right-0 flex justify-center items-center gap-1.5 sm:gap-2 z-30 pt-2">
             {items.map((_, idx) => (
               <button
                 key={idx}

@@ -1,17 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, Variants, useReducedMotion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScrollListProps<T> {
   data: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
   itemHeight?: number;
+  itemHeightMobile?: number;
 }
 
 const ScrollList = <T,>({
   data,
   renderItem,
   itemHeight = 155,
+  itemHeightMobile,
 }: ScrollListProps<T>) => {
+  const isMobile = useIsMobile();
+  const effectiveHeight = isMobile && itemHeightMobile != null ? itemHeightMobile : itemHeight;
   const listRef = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number>(0);
   const shouldReduceMotion = useReducedMotion();
@@ -51,7 +56,7 @@ const ScrollList = <T,>({
     return () => {
       window.removeEventListener("scroll", updateFocusedItem);
     };
-  }, [data, itemHeight]);
+  }, [data, effectiveHeight]);
 
   const itemVariants: Variants = {
     hidden: {
@@ -100,12 +105,13 @@ const ScrollList = <T,>({
         return (
           <motion.div
             key={index}
-            className="scroll-list__item mx-auto max-w-5xl w-full px-1 sm:px-0"
+            className="scroll-list__item mx-auto max-w-5xl w-full px-1 sm:px-0 relative"
             variants={itemVariants}
             initial="hidden"
             animate={variant}
             style={{
-              height: itemHeight ? `${itemHeight}px` : "auto",
+              height: effectiveHeight ? `${effectiveHeight}px` : "auto",
+              pointerEvents: "auto",
             }}
           >
             {renderItem(item, index)}

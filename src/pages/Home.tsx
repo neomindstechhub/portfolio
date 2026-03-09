@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ThreeDCarousel from "@/components/ThreeDCarousel";
 import ScrollList from "@/components/ScrollList";
@@ -12,6 +12,7 @@ const MAIN_SITE_URL = "https://neomindstechhub.com";
 const carouselItems = projects.map(projectToCarouselItem);
 
 export default function Home() {
+  const navigate = useNavigate();
   const allProjectsRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const [showBackToCarousel, setShowBackToCarousel] = useState(false);
@@ -112,10 +113,20 @@ export default function Home() {
         <ScrollList<PortfolioProject>
           data={projects}
           itemHeight={190}
+          itemHeightMobile={300}
           renderItem={(project) => (
-            <Link
-              to={`/${project.slug}`}
-              className="group relative flex h-full w-full items-center gap-3 sm:gap-5 rounded-2xl border border-white/5 bg-white/5 px-4 sm:px-5 py-4 sm:py-4 shadow-[0_18px_80px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_24px_96px_rgba(0,0,0,0.8)] active:scale-[0.99] sm:hover:-translate-y-0.5 touch-manipulation min-h-[120px]"
+            <div
+              role="link"
+              tabIndex={0}
+              onClick={() => navigate(`/${project.slug}`)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(`/${project.slug}`);
+                }
+              }}
+              className="group relative flex h-full w-full items-center gap-3 sm:gap-5 rounded-2xl border border-white/5 bg-white/5 px-4 sm:px-5 py-4 sm:py-4 shadow-[0_18px_80px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_24px_96px_rgba(0,0,0,0.8)] active:scale-[0.99] sm:hover:-translate-y-0.5 touch-manipulation min-h-[120px] cursor-pointer"
+              aria-label={`View ${project.title} details`}
             >
               <div
                 className="hidden sm:block h-28 w-40 flex-shrink-0 overflow-hidden rounded-xl bg-muted bg-cover bg-center"
@@ -135,7 +146,7 @@ export default function Home() {
                 </p>
 
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {project.tags.slice(0, 4).map((tag) => (
+                  {project.tags.slice(0, 6).map((tag) => (
                     <span
                       key={tag}
                       className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary"
@@ -149,7 +160,7 @@ export default function Home() {
               <span className="ml-2 text-xs font-medium text-primary opacity-80 group-hover:opacity-100">
                 View
               </span>
-            </Link>
+            </div>
           )}
         />
       </section>

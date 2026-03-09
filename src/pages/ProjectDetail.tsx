@@ -166,11 +166,11 @@ export default function ProjectDetail() {
           <p className="sr-only" itemProp="description">
             {project.shortDescription}
           </p>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3">
+          <div className="flex gap-1.5 sm:gap-2 mt-3 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded-full text-[10px] sm:text-caption"
+                className="px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded-full text-[10px] sm:text-caption whitespace-nowrap shrink-0"
               >
                 {tag}
               </span>
@@ -230,11 +230,11 @@ export default function ProjectDetail() {
             <h2 id="tech-heading" className="text-heading-3 font-semibold text-foreground mb-4 scroll-mt-6">
               Technologies
             </h2>
-            <ul className="flex flex-wrap gap-2">
+            <ul className="flex gap-2 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
               {project.technologies.map((tech) => (
                 <li
                   key={tech}
-                  className="px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-body"
+                  className="px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-body whitespace-nowrap shrink-0"
                 >
                   {tech}
                 </li>
