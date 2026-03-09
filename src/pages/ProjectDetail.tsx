@@ -36,14 +36,14 @@ function ProjectContent({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <div className="project-content space-y-6 max-w-3xl leading-relaxed">
+    <div className="project-content space-y-5 sm:space-y-6 max-w-3xl leading-relaxed">
       {blocks.map((b, i) => {
         if (!b) return null;
         if (b.isHeading && b.heading) {
           return (
             <h2
               key={i}
-              className="text-heading-3 font-semibold text-foreground mt-8 mb-2 first:mt-0 scroll-mt-6"
+              className="text-heading-3 font-semibold text-foreground mt-8 sm:mt-10 mb-3 first:mt-0 scroll-mt-6"
               id={b.heading.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}
             >
               {b.heading}
@@ -52,7 +52,7 @@ function ProjectContent({ text }: { text: string }) {
         }
         if (b.isList && b.listItems.length > 0) {
           return (
-            <ul key={i} className="list-none space-y-2 pl-0">
+            <ul key={i} className="list-none space-y-2.5 sm:space-y-2 pl-0">
               {b.listItems.map((item, j) => (
                 <li
                   key={j}
@@ -132,7 +132,7 @@ export default function ProjectDetail() {
   const isEmbed = isYouTube || isVimeo;
 
   return (
-    <div className="relative max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 pt-14 sm:pt-8">
+    <div className="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 py-8 sm:py-12 pt-16 sm:pt-12 pb-12 sm:pb-16">
       <button
         type="button"
         onClick={() => navigate(-1)}
@@ -141,7 +141,7 @@ export default function ProjectDetail() {
       >
         <ArrowLeft className="w-4 h-4" />
       </button>
-      <nav className="mb-6 sm:mb-8 pt-0 sm:pt-4" aria-label="Breadcrumb">
+      <nav className="mb-8 sm:mb-10 pt-2 sm:pt-4" aria-label="Breadcrumb">
         <ol className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-sm sm:text-body text-muted-foreground">
           <li>
             <Link to="/" className="hover:text-primary transition-colors focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
@@ -156,8 +156,8 @@ export default function ProjectDetail() {
       </nav>
 
       <article itemScope itemType="https://schema.org/CreativeWork">
-        <header className="mb-8 sm:mb-10">
-          <p className="text-caption font-medium text-primary uppercase tracking-wider mb-1">
+        <header className="mb-10 sm:mb-12">
+          <p className="text-caption font-medium text-primary uppercase tracking-wider mb-2">
             {project.brand}
           </p>
           <h1 className="text-xl sm:text-heading-1 font-bold text-foreground leading-tight" itemProp="name">
@@ -166,7 +166,7 @@ export default function ProjectDetail() {
           <p className="sr-only" itemProp="description">
             {project.shortDescription}
           </p>
-          <div className="flex gap-1.5 sm:gap-2 mt-3 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
+          <div className="flex gap-1.5 sm:gap-2 mt-4 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
             {project.tags.map((tag) => (
               <span
                 key={tag}
@@ -179,7 +179,7 @@ export default function ProjectDetail() {
         </header>
 
         <div
-          className="w-full aspect-video rounded-xl overflow-hidden bg-muted mb-10 border border-white/5"
+          className="w-full aspect-video rounded-xl overflow-hidden bg-muted mb-10 sm:mb-12 border border-white/5"
           style={{
             backgroundImage: `url(${project.imageUrl})`,
             backgroundSize: "cover",
@@ -190,8 +190,8 @@ export default function ProjectDetail() {
         />
 
         {project.videoUrl && (
-          <section className="mb-10" aria-labelledby="video-heading">
-            <h2 id="video-heading" className="text-heading-3 font-semibold text-foreground mb-4 scroll-mt-6">
+          <section className="mb-10 sm:mb-12" aria-labelledby="video-heading">
+            <h2 id="video-heading" className="text-heading-3 font-semibold text-foreground mb-4 sm:mb-5 scroll-mt-6">
               Video overview
             </h2>
             <div className="aspect-video rounded-lg overflow-hidden bg-black">
@@ -217,8 +217,8 @@ export default function ProjectDetail() {
         )}
 
         {project.longDescription && (
-          <section className="mb-10" aria-labelledby="about-heading">
-            <h2 id="about-heading" className="text-heading-3 font-semibold text-foreground mb-4 scroll-mt-6">
+          <section className="mb-10 sm:mb-12" aria-labelledby="about-heading">
+            <h2 id="about-heading" className="text-heading-3 font-semibold text-foreground mb-4 sm:mb-5 scroll-mt-6">
               About this project
             </h2>
             <ProjectContent text={project.longDescription} />
@@ -226,15 +226,15 @@ export default function ProjectDetail() {
         )}
 
         {project.technologies && project.technologies.length > 0 && (
-          <section className="mb-10" aria-labelledby="tech-heading">
-            <h2 id="tech-heading" className="text-heading-3 font-semibold text-foreground mb-4 scroll-mt-6">
+          <section className="mb-10 sm:mb-12" aria-labelledby="tech-heading">
+            <h2 id="tech-heading" className="text-heading-3 font-semibold text-foreground mb-4 sm:mb-5 scroll-mt-6">
               Technologies
             </h2>
-            <ul className="flex gap-2 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
+            <ul className="flex gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hidden -mx-1 px-1 sm:flex-wrap sm:overflow-visible">
               {project.technologies.map((tech) => (
                 <li
                   key={tech}
-                  className="px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-body whitespace-nowrap shrink-0"
+                  className="px-3 py-1.5 sm:py-2 rounded-md bg-muted text-muted-foreground text-body whitespace-nowrap shrink-0"
                 >
                   {tech}
                 </li>
@@ -244,15 +244,15 @@ export default function ProjectDetail() {
         )}
 
         {project.outcomes && project.outcomes.length > 0 && (
-          <section className="mb-10" aria-labelledby="outcomes-heading">
-            <h2 id="outcomes-heading" className="text-heading-3 font-semibold text-foreground mb-4 scroll-mt-6">
+          <section className="mb-10 sm:mb-12" aria-labelledby="outcomes-heading">
+            <h2 id="outcomes-heading" className="text-heading-3 font-semibold text-foreground mb-4 sm:mb-5 scroll-mt-6">
               Outcomes
             </h2>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5 sm:space-y-2">
               {project.outcomes.map((outcome) => (
                 <li
                   key={outcome}
-                  className="flex items-start gap-2 text-muted-foreground text-body-lg"
+                  className="flex items-start gap-2.5 sm:gap-2 text-muted-foreground text-body-lg"
                 >
                   <span className="text-primary mt-0.5">•</span>
                   <span>{outcome}</span>
@@ -262,7 +262,7 @@ export default function ProjectDetail() {
           </section>
         )}
 
-        <section className="pt-10 border-t border-border">
+        <section className="pt-10 sm:pt-12 pb-2 border-t border-border">
           <p className="text-body text-muted-foreground mb-4">
             Interested in a similar project or want to discuss AI for your business?
           </p>
@@ -282,7 +282,7 @@ export default function ProjectDetail() {
         href={MAIN_SITE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-12 inline-flex items-center gap-2 text-body text-muted-foreground hover:text-primary transition-colors border border-white/10 rounded-lg px-4 py-2 hover:border-primary/40 hover:bg-white/5"
+        className="mt-12 sm:mt-14 inline-flex items-center gap-2 text-body text-muted-foreground hover:text-primary transition-colors border border-white/10 rounded-lg px-4 py-2.5 hover:border-primary/40 hover:bg-white/5"
         aria-label="Back to main website"
       >
         <ExternalLink className="w-4 h-4 shrink-0" />

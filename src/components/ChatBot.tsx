@@ -6,7 +6,7 @@ import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 type Message = { role: "user" | "assistant"; content: string };
 
 const WELCOME =
-  "Hi! I'm the NeoMinds AI assistant. I can tell you about our projects—HR automation, e-commerce analytics, RAG chatbots, EdTech, mental wellness, and more. What would you like to know? Or **Book a Demo** if you're ready to connect!";
+  "Hi! What brings you here today—exploring our services or ready to connect?";
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
@@ -138,7 +138,7 @@ export default function ChatBot() {
             </div>
             <div>
               <h3 className="font-semibold text-foreground">NeoMinds AI</h3>
-              <p className="text-xs text-muted-foreground">Ask about our work</p>
+              <p className="text-xs text-muted-foreground">Services & info</p>
             </div>
           </div>
           <button
@@ -201,7 +201,7 @@ export default function ChatBot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about our projects..."
+              placeholder="Ask about our services..."
               rows={1}
               className="flex-1 bg-transparent px-4 py-3 text-foreground placeholder:text-muted-foreground/60 resize-none focus:outline-none text-sm min-h-[48px] max-h-24"
               disabled={streaming}

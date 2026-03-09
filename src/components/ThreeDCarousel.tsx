@@ -93,7 +93,7 @@ const ThreeDCarousel = ({
     >
       <div className="w-full px-3 sm:px-6 lg:px-8 max-w-7xl">
         <div
-          className="relative overflow-hidden min-h-[420px] sm:min-h-[560px] md:min-h-[680px]"
+          className="relative overflow-hidden min-h-[460px] sm:min-h-[640px] md:min-h-[780px]"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onTouchStart={isMobileSwipe ? onTouchStart : undefined}
@@ -114,11 +114,11 @@ const ThreeDCarousel = ({
                 aria-label={index === active ? `Project ${index + 1} of ${items.length}: ${item.title}. Tap to view details.` : undefined}
               >
                 <Card
-                  className="relative overflow-hidden bg-white/5 backdrop-blur-md border border-white/5 hover:border-primary/50 hover:bg-white/10 shadow-[0_18px_80px_rgba(0,0,0,0.7)] hover:shadow-[0_24px_96px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.05)] hover:-translate-y-0.5 rounded-2xl flex flex-col h-full transition-all duration-300 max-w-[calc(100vw-1.5rem)] sm:max-w-3xl"
-                  style={{ minHeight: isMobile ? 380 : cardHeight }}
+                  className="relative overflow-hidden bg-white/5 backdrop-blur-md border border-white/5 hover:border-primary/50 hover:bg-white/10 shadow-[0_18px_80px_rgba(0,0,0,0.7)] hover:shadow-[0_24px_96px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.05)] hover:-translate-y-0.5 rounded-2xl flex flex-col h-full transition-all duration-300 max-w-[calc(100vw-1.5rem)] sm:max-w-[640px] md:max-w-[720px]"
+                  style={{ minHeight: isMobile ? 420 : cardHeight }}
                 >
                   <div className="absolute inset-0 rounded-2xl pointer-events-none z-0" style={{ background: "linear-gradient(165deg, rgba(255,255,255,0.06) 0%, transparent 45%, transparent 100%)" }} aria-hidden />
-                  <div className="relative h-44 sm:h-64 md:h-80 overflow-hidden rounded-t-2xl">
+                  <div className="relative h-52 sm:h-80 md:h-96 overflow-hidden rounded-t-2xl">
                     <div
                       className="absolute inset-0 bg-black"
                       style={{

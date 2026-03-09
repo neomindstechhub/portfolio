@@ -9,7 +9,7 @@ import type { PortfolioProject } from "@/types/project";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 
 const MAIN_SITE_URL = "https://neomindstechhub.com";
-const carouselItems = projects.map(projectToCarouselItem);
+const carouselItems = projects.slice(0, 10).map(projectToCarouselItem);
 
 export default function Home() {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ export default function Home() {
           items={carouselItems}
           autoRotate
           rotateInterval={3500}
-          cardHeight={600}
+          cardHeight={720}
           isMobileSwipe
         />
 
@@ -112,8 +112,8 @@ export default function Home() {
 
         <ScrollList<PortfolioProject>
           data={projects}
-          itemHeight={190}
-          itemHeightMobile={300}
+          itemHeight={340}
+          itemHeightMobile={380}
           renderItem={(project) => (
             <div
               role="link"
@@ -125,16 +125,16 @@ export default function Home() {
                   navigate(`/${project.slug}`);
                 }
               }}
-              className="group relative flex h-full w-full items-center gap-3 sm:gap-5 rounded-2xl border border-white/5 bg-white/5 px-4 sm:px-5 py-4 sm:py-4 shadow-[0_18px_80px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_24px_96px_rgba(0,0,0,0.8)] active:scale-[0.99] sm:hover:-translate-y-0.5 touch-manipulation min-h-[120px] cursor-pointer"
+              className="group relative flex h-full w-full flex-col rounded-2xl border border-white/5 bg-white/5 overflow-hidden shadow-[0_18px_80px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_24px_96px_rgba(0,0,0,0.8)] active:scale-[0.99] sm:hover:-translate-y-0.5 touch-manipulation cursor-pointer"
               aria-label={`View ${project.title} details`}
             >
               <div
-                className="hidden sm:block h-28 w-40 flex-shrink-0 overflow-hidden rounded-xl bg-muted bg-cover bg-center"
+                className="w-full h-36 sm:h-44 flex-shrink-0 overflow-hidden bg-muted bg-cover bg-center"
                 style={{ backgroundImage: `url(${project.imageUrl})` }}
                 aria-hidden
               />
 
-              <div className="flex min-w-0 flex-1 flex-col">
+              <div className="flex min-w-0 flex-1 flex-col px-4 sm:px-5 py-3 sm:py-4">
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary mb-1">
                   {project.brand}
                 </p>
@@ -145,21 +145,21 @@ export default function Home() {
                   {project.shortDescription}
                 </p>
 
-                <div className="mt-3 flex flex-wrap gap-1.5">
+                <div className="mt-3 flex flex-wrap gap-1.5 overflow-x-auto scrollbar-hidden sm:overflow-visible">
                   {project.tags.slice(0, 6).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary"
+                      className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary shrink-0"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
 
-              <span className="ml-2 text-xs font-medium text-primary opacity-80 group-hover:opacity-100">
-                View
-              </span>
+                <span className="mt-3 text-xs font-medium text-primary opacity-80 group-hover:opacity-100">
+                  View
+                </span>
+              </div>
             </div>
           )}
         />
